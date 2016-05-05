@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Timer</title>
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+  
+
+  
+</head>
+<body ng-app="intervalExample">
+  <script>
+  angular.module('intervalExample', [])
+    .controller('ExampleController', ['$scope', '$interval',
+      function($scope, $interval) {
+        var d = new Date();
+        $scope.datetext = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+       $scope.start1=function(){
+           promise = $interval(function(){
+          
+          var d = new Date();
+           $scope.datetext = d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+        },1000)
+       }
+        
+       
+       
+        $scope.stop1= function(){
+          $interval.cancel(promise)
+        }
+        
+      }]);
+</script>
+
+<div>
+  <div ng-controller="ExampleController">
+    
+    Current time is: {{ datetext }}
+    <button type="button" data-ng-click="stop1()">Stop</button>
+    <button type="button" data-ng-click="start1()">Start</button>
+   
+  </div>
+</div>
+</body>
+</html>
+
